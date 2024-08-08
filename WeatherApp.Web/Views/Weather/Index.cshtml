@@ -1,0 +1,36 @@
+@model WeatherApp.Web.Models.WeatherViewModel
+
+@using WeatherApp.Components
+
+@{
+    ViewBag.Title = "Weather Forecast";
+}
+
+<h1>Location</h1>
+
+<form method="post" class="d-flex align-items-center mb-4">
+    <div class="form-group mb-2 me-2">
+        <label for="city" class="visually-hidden">City:</label>
+        @Html.DropDownList("city", (SelectList)ViewBag.Cities, "Select a city", new { @class = "form-control", id = "city", style = "width: auto;" })
+        @Html.ValidationMessage("city", "", new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary mb-2" id="submitButton" disabled>Get Forecast</button>
+</form>
+
+@if (@Model is not null)
+{
+    <component type="typeof(WeatherApp.Components.Weather)" render-mode="Server" param-Forecasts="@Model.Forecasts" />
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const citySelect = document.getElementById('city');
+            const submitButton = document.getElementById('submitButton');
+
+            citySelect.addEventListener('change', function () {
+                submitButton.disabled = citySelect.value === '';
+            });
+        });
+    </script>
+}

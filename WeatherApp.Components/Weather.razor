@@ -1,0 +1,93 @@
+﻿@using WeatherApp.Shared.Models
+
+<PageTitle>Weather</PageTitle>
+
+<h1>Forecast</h1>
+
+@if (Forecasts is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    if (Forecasts.Length == 0)
+    {
+        <p>There is currently no weather forecast available for the selected city.</p>
+    }
+    else
+    {
+        <p>City: @Forecasts.First().City</p>
+
+        <div class="form-group mb-3">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" @bind="showDate" id="showDate">
+                <label class="form-check-label" for="showDate">Date</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" @bind="showTemperatureC" id="showTempC">
+                <label class="form-check-label" for="showTempC">Temp. (C)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" @bind="showTemperatureF" id="showTempF">
+                <label class="form-check-label" for="showTempF">Temp. (F)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" @bind="showHumidity" id="showHumidity">
+                <label class="form-check-label" for="showHumidity">Humidity (%)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" @bind="showWindKph" id="showWindKph">
+                <label class="form-check-label" for="showWindKph">Wind (Kph)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" @bind="showWindMph" id="showWindMph">
+                <label class="form-check-label" for="showWindMph">Wind (Mph)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" @bind="showSummary" id="showSummary">
+                <label class="form-check-label" for="showSummary">Summary</label>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    @if (showDate) { <th>Date</th> }
+                    @if (showTemperatureC) { <th>Temp. (C)</th> }
+                    @if (showTemperatureF) { <th>Temp. (F)</th> }
+                    @if (showHumidity) { <th>Humidity (%)</th> }
+                    @if (showWindKph) { <th>Wind (Kph)</th> }
+                    @if (showWindMph) { <th>Wind (Mph)</th> }
+                    @if (showSummary) { <th>Summary</th> }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var forecast in Forecasts)
+                {
+                    <tr>
+                        @if (showDate) { <td>@forecast.Date.ToShortDateString()</td> }
+                        @if (showTemperatureC) { <td>@forecast.TemperatureC</td> }
+                        @if (showTemperatureF) { <td>@forecast.TemperatureF</td> }
+                        @if (showHumidity) { <td>@forecast.Humidity</td> }
+                        @if (showWindKph) { <td>@forecast.WindKph</td> }
+                        @if (showWindMph) { <td>@forecast.WindMph</td> }
+                        @if (showSummary) { <td>@forecast.Summary</td> }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@code {
+    [Parameter]
+    public WeatherForecast[]? Forecasts { get; set; }
+
+    private bool showDate { get; set; } = true;
+    private bool showTemperatureC { get; set; } = true;
+    private bool showTemperatureF { get; set; } = true;
+    private bool showHumidity { get; set; } = true;
+    private bool showWindKph { get; set; } = true;
+    private bool showWindMph { get; set; } = true;
+    private bool showSummary { get; set; } = true;
+}
