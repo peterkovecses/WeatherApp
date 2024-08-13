@@ -4,18 +4,18 @@ public class WeatherService(IMemoryCache cache) : IWeatherService
 {
     private static readonly WeatherForecast[] PredefinedForecasts =
     [
-        new WeatherForecast { TemperatureC = -5, Summary = "Freezing" },
-        new WeatherForecast { TemperatureC = -6, Summary = "Freezing" },
-        new WeatherForecast { TemperatureC = 0, Summary = "Chilly" },
-        new WeatherForecast { TemperatureC = 1, Summary = "Chilly" },
-        new WeatherForecast { TemperatureC = 15, Summary = "Cool" },
-        new WeatherForecast { TemperatureC = 14, Summary = "Cool" },
-        new WeatherForecast { TemperatureC = 22, Summary = "Mild" },
-        new WeatherForecast { TemperatureC = 21, Summary = "Mild" },
-        new WeatherForecast { TemperatureC = 31, Summary = "Warm" },
-        new WeatherForecast { TemperatureC = 30, Summary = "Warm" },
-        new WeatherForecast { TemperatureC = 35, Summary = "Hot" },
-        new WeatherForecast { TemperatureC = 40, Summary = "Hot" }
+        new() { TemperatureC = -5, Summary = "Freezing" },
+        new() { TemperatureC = -6, Summary = "Freezing" },
+        new() { TemperatureC = 0, Summary = "Chilly" },
+        new() { TemperatureC = 1, Summary = "Chilly" },
+        new() { TemperatureC = 15, Summary = "Cool" },
+        new() { TemperatureC = 14, Summary = "Cool" },
+        new() { TemperatureC = 22, Summary = "Mild" },
+        new() { TemperatureC = 21, Summary = "Mild" },
+        new() { TemperatureC = 31, Summary = "Warm" },
+        new() { TemperatureC = 30, Summary = "Warm" },
+        new() { TemperatureC = 35, Summary = "Hot" },
+        new() { TemperatureC = 40, Summary = "Hot" }
     ];
 
     public WeatherForecast[] GetForecast(string city)
